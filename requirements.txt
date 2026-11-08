@@ -1,0 +1,23 @@
+# ==========================================================
+# sinta_scraper – dependency
+# Python 3.9+  (diuji pada 3.11 & 3.13)
+#   pip install -r requirements.txt
+# ==========================================================
+
+# --- inti scraping (dipakai versi modul & versi satu-file) ---------------
+requests>=2.31,<3            # HTTP client (session + retry manual di kode)
+beautifulsoup4>=4.12,<5      # parser HTML
+lxml>=5.0                    # parser cepat untuk BeautifulSoup(..., "lxml")
+
+# --- output --------------------------------------------------------------
+pandas>=2.0,<3               # dipakai sinta_scraper_bs4.py (rebuild XLSX dari CSV)
+openpyxl>=3.1,<4             # engine .xlsx untuk pandas
+
+# --- opsional -------------------------------------------------------------
+# Selenium HANYA sebagai fallback kalau requests kena 403 WAF SINTA terus.
+# Script otomatis mendeteksi: kalau tidak terpasang, fallback dilewati.
+# selenium>=4.20
+# webdriver-manager>=4.0
+
+# --- pengembangan --------------------------------------------------------
+# pytest>=8.0

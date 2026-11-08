@@ -1,0 +1,19 @@
+{
+  "_catatan": "Template kebutuhan yang bisa diedit tanpa menyentuh kode. Pakai dengan: python -m scraper.cli --profile profiles/farmasi_bahan_alam.json ...",
+  "bidang": "Farmasi bahan alam / Fitokimia",
+  "penelitian": "Ekstraksi dan antioksidan",
+  "potensi_kebutuhan": "Preparasi ekstrak (maserasi/soxhlet/UAE/MAE), skrining fitokimia, penetapan kadar fenolik & flavonoid total, uji aktivitas antioksidan (DPPH/ABTS/FRAP), standarisasi ekstrak, dan analisis HPLC/LC-MS",
+  "kata_kunci": [
+    "farmasi", "pharmacy", "pharmaceutical", "farmakognosi",
+    "fitokimia", "phytochem", "bahan alam", "natural product",
+    "ekstrak", "extract", "ekstraksi", "extraction",
+    "antioksidan", "antioxidant", "fenolik", "phenolic",
+    "flavonoid", "alkaloid", "tanin", "terpenoid",
+    "herbal", "jamu", "obat tradisional", "simplisia",
+    "DPPH", "ABTS", "FRAP", "fitomedisin",
+    "makroalga", "mikroalga", "rumput laut", "seaweed",
+    "immunomodulator", "biokimia", "biologi molekuler"
+  ],
+  "min_prioritas_tinggi": 4,
+  "min_prioritas_sedang": 1
+}

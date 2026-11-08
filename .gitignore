@@ -1,0 +1,30 @@
+# ===========================================================================
+# JANGAN pernah commit ini. Yang di-ignore bukan sekadar "sampah build",
+# tetapi DATA ORANG LAIN: nama dosen, email, dan HTML hasil scraping.
+# ===========================================================================
+
+# --- hasil scraping (nama, email, profil dosen = data pribadi) -------------
+hasil/
+logs/
+*.csv
+*.xlsx
+*.json
+!profiles/*.json
+
+# --- cache & HTML pihak ketiga (hak cipta + jejak scraping) ---------------
+.cache_sinta/
+debug/
+tests/fixtures/*.html
+
+# --- konfigurasi lokal -----------------------------------------------------
+autorun_config.ini
+!autorun_config.ini.example
+cookies.txt
+.netscape-cookies
+
+# --- Python ----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/

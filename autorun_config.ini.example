@@ -1,0 +1,102 @@
+; ===========================================================================
+;  KONFIGURASI AUTORUN — SINTA Scraper
+;  Buka dengan Notepad, ubah angkanya, simpan, lalu klik dua kali autorun.bat
+;
+;  Aturan penulisan:
+;    - satu nilai per baris
+;    - untuk beberapa nilai, pisahkan dengan koma:  6518, 42449
+;    - tanda ; di awal baris = komentar (diabaikan)
+; ===========================================================================
+
+[seed]
+; mode = subjek  -> ambil dari subject_ids (semua halaman disapu, lalu difilter)
+;        kampus  -> ambil dari daftar kampus: HANYA kampus di wilayah target
+;                   yang dibuka, semua dosennya otomatis in-region
+;        auto    -> kampus kalau subject_ids kosong, kalau tidak subjek
+; Catatan: SINTA tidak punya filter wilayah, jadi 'subjek' memang harus menyapu
+; semua halaman dulu. 'kampus' menghindari itu.
+mode = auto
+
+; mode kampus: batasi jumlah kampus yang diproses (0 = semua yang cocok)
+max_campuses = 0
+
+; --- CARA PALING MUDAH: tempel URL SINTA apa saja --------------------------
+; Salin dari address bar browser, contoh:
+;   url = https://sinta.kemdiktisaintek.go.id/subjects/detail/45823?page=1
+;   url = https://sinta.kemdiktisaintek.go.id/affiliations/profile/430
+;   url = https://sinta.kemdiktisaintek.go.id/authors/profile/5996301
+; Kalau url diisi, subject_ids di bawah TIDAK perlu diisi (kosongkan).
+url = https://sinta.kemdiktisaintek.go.id/subjects/detail/45823?page=1
+
+; --- ATAU isi ID secara manual (boleh kombinasikan beberapa) ---------------
+
+; ID subjek SINTA. Ambil dari URL: sinta.kemdiktisaintek.go.id/subjects/detail/6518
+;   6518  = Farmasi Bahan Alam
+;   42449 = Teknologi Farmasi
+;   24108 = Kimia Farmasi
+;   8729  = Biologi Farmasi
+;   45887 = Public Health (contoh yang Anda kirim)
+subject_ids =
+
+; ID institusi. Ambil dari URL: .../affiliations/profile/430
+;   430 = Universitas Indonesia, 476 = Universitas Tarumanagara
+affiliation_ids =
+
+; ID dosen langsung. Ambil dari URL: .../authors/profile/5996301
+author_ids =
+
+; Kata kunci pencarian nama dosen (mis. farmasi)
+search_terms =
+
+; Jumlah halaman daftar PER seed (1 halaman = ~10 dosen).
+;   pages = 2    -> ~20 dosen (cepat, untuk uji coba)
+;   pages = all  -> SEMUA halaman subjek/institusi
+;                   contoh subjek 45823 = 136 halaman / 1.355 dosen
+pages = 2
+
+
+[filter]
+; Filter wilayah. Pilihan: JABODETABEK, DKI, BODETABEK, JABAR, INDONESIA
+; Kosongkan (= INDONESIA) kalau tidak ingin difilter.
+region = JABODETABEK
+
+; Berapa dosen yang PROFILNYA dibuka (buka profil = 1-3 detik per dosen).
+; Fase 1 (sapu daftar) tetap jalan sampai halaman terakhir dan murah;
+; 'limit' hanya membatasi fase 2, jadi 1.355 dosen bisa dijelajahi
+; dengan mengambil, misalnya, 50 yang paling relevan.
+;   0 = semua yang lolos filter
+limit = 0
+
+
+[output]
+; Sumber publikasi: scopus, googlescholar, garuda, wos, rama
+views = scopus,googlescholar
+
+; Jumlah publikasi relevan yang ditampilkan per dosen
+pub_limit = 3
+
+; Prefix file hasil -> menghasilkan hasil\<prefix>.csv / .xlsx / .json
+prefix =
+
+
+[jaringan]
+; Jeda antar request (detik). Pakai 2 atau lebih kalau memakai relay.
+delay = 1.5
+
+; Jumlah thread paralel saat membuka profil dosen (fase 2).
+; 1 = berurutan (paling sopan, paling lambat)
+; 3 = seimbang (disarankan)
+; 5 = cepat, tapi risiko 429 lebih besar
+workers = 3
+
+; true  = lewat relay *.translate.goog (WAJIB kalau dapat error 403 / situs
+;         tidak bisa diakses, biasanya di VPS/cloud)
+; false = koneksi langsung (dari IndiHome/Telkomsel biasanya bisa)
+relay = false
+
+; Simpan cache halaman supaya autorun berikutnya lebih cepat & hemat request
+cache = true
+
+; Coba pakai browser (Selenium) kalau requests tetap gagal.
+; Butuh: pip install selenium
+selenium_fallback = true
